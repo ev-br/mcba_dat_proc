@@ -24,20 +24,21 @@ def main(action_args):
               "store_roots"     : False,
             }
 
-    V = 0.8
-    N0 = 45
-    N_f = [1, 3]
+    V = 0.4
+    N0 = 135
+    N_f = [1]
 #    mqs = [6, 7, 8, 9, 10, 11, 12, 13]  # @ N = 15
-    mqs = [21, 22, 23, 24, 25, 26, 27]   # @ N = 45
+#    mqs = [21, 22, 23, 24, 25, 26, 27]   # @ N = 45
+    mqs = [82, 84, 87]       # @ N = 135
 
-    base_path="../data/g4.8"
+    base_path="../data/g2.4"
     tasks = []
     for f in N_f:
         N = N0 * f
         for mq in mqs:
             par = Par(N=N, L=3*N, V=V, m_q=mq*f)
             db_fname = os.path.join(base_path,
-                    "N{0}V0.8mq{1}.sqlite".format(par.N, par.m_q))
+                    "N{0}V0.4mq{1}.sqlite".format(par.N, par.m_q))
             dct = {"model": SingleImpurity(par), 
                    "db_fname": db_fname}
             tasks.append( copydict(mc_dict, dct) )
@@ -49,7 +50,7 @@ def main(action_args):
             print 'GAMMA: ', gamma(p), 'q = ', initial_q(p), '\n'
         print len(tasks)
     else:
-        factory = WalkerFactory(tasks, 2, freq=1, verbose=True)
+        factory = WalkerFactory(tasks, 3, freq=1, verbose=True)
         factory.start()
 
 #######################
