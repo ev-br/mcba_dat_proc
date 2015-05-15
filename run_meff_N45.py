@@ -24,9 +24,9 @@ def main(action_args):
             }
 
     V = 2.5
-    N0 = 45
-    mqs = [0, 1, 2, 3, 4, 5]
-    N_f = [1, 3]
+    N0 = 135
+    mqs = [1, 2, 3, 4, 5]
+    N_f = [1]
     #mqs = [8, 9, 11, 12, 14, 15]
 
     base_path="../data/meff"
@@ -48,7 +48,7 @@ def main(action_args):
             print 'GAMMA: ', gamma(p), 'q = ', initial_q(p), '\n'
         print len(tasks)   
     else:
-        factory = WalkerFactory(tasks, 4, freq=1, verbose=True)
+        factory = WalkerFactory(tasks, 5, freq=1, verbose=True)
         factory.start()
 
 #######################
