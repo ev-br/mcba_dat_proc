@@ -19,15 +19,16 @@ def main(action_args):
               "printout_sweeps" : 100,
               "seed"            : 42,
               "verbose_logg"    : True,
-              "threshold"       : 0.99, 
+              "threshold"       : 0.96, 
               "store_roots"     : False,
             }
 
-    V = 2
-    N0 = 45
-    mqs = [0, 1, 2, 3, 4, 5]
+    V = 2.5
+    N0 = 135
+    mqs = [1, 2, 3, 4, 5]
     N_f = [1]
-    
+    #mqs = [8, 9, 11, 12, 14, 15]
+
     base_path="../data/meff"
     tasks = []
     for f in N_f:
@@ -35,7 +36,7 @@ def main(action_args):
         for mq in mqs:
             par = Par(N=N, L=3*N, V=V, m_q=mq*f)
             db_fname = os.path.join(base_path, 
-                                    "N{0}V2mq{1}.sqlite".format(par.N, par.m_q))
+                                    "N{0}V2.5mq{1}.sqlite".format(par.N, par.m_q))
             dct = {"model": SingleImpurity(par), 
                    "db_fname": db_fname}
             tasks.append( copydict(mc_dict, dct) )
@@ -47,7 +48,7 @@ def main(action_args):
             print 'GAMMA: ', gamma(p), 'q = ', initial_q(p), '\n'
         print len(tasks)   
     else:
-        factory = WalkerFactory(tasks, 6, freq=1, verbose=True)
+        factory = WalkerFactory(tasks, 5, freq=1, verbose=True)
         factory.start()
 
 #######################
